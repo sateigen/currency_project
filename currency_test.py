@@ -13,13 +13,19 @@ def test_currency_can_be_equal():
     assert currency1 == currency2
 
 def test_currency_amount_not_equal():
-        currency1 = Currency(99, 'USD')
-        currency2 = Currency(50, 'USD')
+    currency1 = Currency(99, 'USD')
+    currency2 = Currency(50, 'USD')
 
-        assert currency1 != currency2
+    assert currency1 != currency2
 
 def test_currency_amount_not_equal():
-        currency1 = Currency(50, 'EUR')
-        currency2 = Currency(50, 'USD')
+    currency1 = Currency(50, 'EUR')
+    currency2 = Currency(50, 'USD')
 
-        assert currency1 != currency2
+    assert currency1 != currency2
+
+def test_add_currencies_with_equal_currency_codes():
+    currency1 = Currency(50, 'USD')
+    currency2 = Currency(75, 'USD')
+
+    assert currency1 + currency2 == (125, 'USD')
