@@ -29,3 +29,10 @@ def test_add_currencies_with_equal_currency_codes():
     currency2 = Currency(75, 'USD')
 
     assert currency1 + currency2 == (125, 'USD')
+
+
+def test_add_currencies_with_equal_currency_codes():
+    currency1 = Currency(75, 'USD')
+    currency2 = Currency(50, 'USD')
+
+    assert currency1 + currency2 == (25, 'USD')
