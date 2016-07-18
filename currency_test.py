@@ -64,3 +64,12 @@ def test_currency_times_float():
     number = 10.5
 
     assert currency1 * number == (52.5, 'USD')
+
+def test_replace_symbol_with_currency_code():
+    currency1 = '$5.98'
+    currency2 = '€5.65'
+    currency3 = '¥5.65'
+
+    assert Currency.replace_symbol(currency1) == (5.98, 'USD')
+    assert Currency.replace_symbol(currency2) == (5.65, 'EUR')
+    assert Currency.replace_symbol(currency3) == (5.65, 'JPY')
