@@ -51,3 +51,16 @@ def test_get_error_when_subtracting_different_currency_codes():
     currency2 = Currency(50, 'USD')
 
     assert_raises(DifferentCurrencyCodeError, Currency.__sub__, currency1, currency2)
+
+
+def test_currency_times_integer():
+    currency1 = Currency(5, 'USD')
+    number = 10
+
+    assert currency1 * number == (50, 'USD')
+
+def test_currency_times_float():
+    currency1 = Currency(5, 'USD')
+    number = 10.5
+
+    assert currency1 * number == (52.5, 'USD')
