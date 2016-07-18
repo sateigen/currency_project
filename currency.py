@@ -8,9 +8,24 @@ class Currency:
 
 
     def __add__(self, other):
-        if self.currency_code == other.currency_code:
+        try:
+            if self.currency_code != other.currency_code:
+                raise DifferentCurrencyCodeError
             return (self.amount + other.amount, self.currency_code)
+        except ZeroDivisionError:
+            pass
 
-    def __add__(self, other):
-        if self.currency_code == other.currency_code:
+
+    def __sub__(self, other):
+        try:
+            if self.currency_code != other.currency_code:
+                raise DifferentCurrencyCodeError
             return (self.amount - other.amount, self.currency_code)
+        except ZeroDivisionError:
+            pass
+
+
+
+
+class DifferentCurrencyCodeError(Exception):
+    pass
