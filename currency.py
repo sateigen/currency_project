@@ -3,6 +3,7 @@ class Currency:
         self.amount = amount
         self.currency_code = currency_code
 
+
     def __eq__(self, other):
         return self.amount == other.amount and self.currency_code == other.currency_code
 
@@ -10,9 +11,8 @@ class Currency:
     def __add__(self, other):
         if self.currency_code != other.currency_code:
             raise DifferentCurrencyCodeError
-        print((self.amount + other.amount, self.currency_code))
-        return (self.amount + other.amount, self.currency_code)
 
+        return (self.amount + other.amount, self.currency_code)
 
 
     def __sub__(self, other):
@@ -26,26 +26,18 @@ class Currency:
         return (self.amount * amount, self.currency_code)
 
 
-    def replace_symbol(self):
+    def assign_currency_code_for_symbol(self):
         symbols = {'$': 'USD', '€': 'EUR', '¥': 'JPY'}
-        x = list(self)
-        for character in x:
+        for character in self[0]:
             if character in symbols:
-                symbol = symbols[character]
-                x.pop(0)
-                money = float(''.join(x))
-                money = self.amount
-                symbol = self.currency_code
-                return (money, symbol)
+                return symbols[character]
 
+
+    def take_symbol_off_amount(self):
+        amount_list = list(self)
+        del amount_list[0]
+        return float(''.join(amount_list))
 
 
 class DifferentCurrencyCodeError(Exception):
     pass
-
-
-# Currency.__add__(Currency(7.50, 'USD'), Currency(9.00, 'USD'))
-
-currency1 = Currency.replace_symbol('$1.22')
-Currency.__add__(Currency(currency1), Currency(9.00, 'USD'))
-# Currency.__add__((Currency.replace_symbol('$1.22')), Currency(9.00, 'USD'))
