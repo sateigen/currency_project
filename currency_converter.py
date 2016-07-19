@@ -1,35 +1,23 @@
-class CurrencyConverter:
-    rates = {'USD': 1.00, 'EUR': 0.902974, 'JPY': 106.157}
+from currency import Currency, DifferentCurrencyCodeError
 
-    def __init__(self, from_code, amount):
+class CurrencyConverter:
+    rates = {'USD': 1.00, 'EUR': 0.902862, 'JPY': 105.916}
+
+    def __init__(self, amount, from_code):
         self.amount = amount
         self.from_code = from_code
-
 
 
     def convert(self, to_code):
         if to_code not in CurrencyConverter.rates:
             raise UnknownCurrencyCodeError
-        return self.amount * CurrencyConverter.rates[to_code]
-
-
-    def super_converter(self, to_code):
-        if to_code not in CurrencyConverter.rates:
-            raise UnknownCurrencyCodeError
-        if self.from_code != 'USD':
-            usd = self.amount / CurrencyConverter.rates[self.from_code]
+        if to_code == 'USD':
+            new_amount = self.amount * CurrencyConverter.rates[to_code]
+            return Currency(new_amount, to_code)
+        else:
+            usd = self.amount / CurrencyConverter.rates[self.currency_code]
             if to_code != 'USD':
-                return usd * CurrencyConverter.rates[to_code]
-
-
-# take user input
-    # def super_converter(self, to_code):
-    #     to_code = input(What)
-    #     if self.from_code != 'USD':
-    #         usd = self.amount / CurrencyConverter.rates[self.from_code]
-    #         if to_code != 'USD':
-    #             return usd * CurrencyConverter.rates[to_code]
-
+                return Currency(usd * CurrencyConverter.rates[to_code], to_code)
 
 
 class UnknownCurrencyCodeError(Exception):
