@@ -44,14 +44,18 @@ def test_subtract_currencies_with_equal_currency_codes():
     assert currency1 - currency2 == (25, 'USD')
 
 
-def test_get_error_when_using_different_currency_codes():
+def test_get_error_when_using_different_currency_codes_when_add():
     currency1 = Currency(70, 'EUR')
     currency2 = Currency(50, 'USD')
 
     assert_raises(DifferentCurrencyCodeError, Currency.__add__, currency1, currency2)
+
+
+def test_get_error_when_using_different_currency_codes_when_sub():
+    currency1 = Currency(70, 'EUR')
+    currency2 = Currency(50, 'USD')
+
     assert_raises(DifferentCurrencyCodeError, Currency.__sub__, currency1, currency2)
-# with assert_raises(DifferentCurrencyCodeError):
-    # currency1 - currency2
 
 
 def test_currency_times_integer():
